@@ -13,5 +13,5 @@ sudo systemctl stop coturn
 
 echo "Copying the config files"
 
-sudo cp turnserver.conf /etc/turnserver.conf
-sudo cp coturn /etc/default/coturn
+sudo cp PostDeploy/turnserver.conf /etc/turnserver.conf
+sudo cp PostDeploy/coturn /etc/default/coturn
