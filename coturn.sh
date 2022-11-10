@@ -11,6 +11,38 @@ echo "Stopping coturn ..."
 
 sudo systemctl stop coturn
 
+
+echo "Delete the unnecessary files"
+
+fullchain="/etc/certs/fulchain.pem"
+
+if [ -f "$fullchain" ] ; then
+    sudo rm "$fullchain"
+fi
+
+privkey="/etc/certs/privkey.pem"
+
+if [ -f "$privkey" ] ; then
+  sudo rm "$privkey"
+fi
+
+
+turnserverconf="/etc/turnserver.conf"
+
+if [ -f "$turnserverconf" ] ; then
+   sudo  rm "$turnserverconf"
+fi
+
+coturn="/etc/default/coturn"
+
+if [ -f "$coturn" ] ; then
+    sudo rm "$coturn"
+fi
+
+
+
+
+
 echo "Enable Coturn"
 
 sudo /bin/sh -c 'echo "TURNSERVER_ENABLED=1" >> /etc/default/coturn'
@@ -151,7 +183,7 @@ sudo /bin/sh -c 'echo "fingerprint" >> /etc/turnserver.conf'
 sudo /bin/sh -c 'echo "lt-cred-mech" >> /etc/turnserver.conf'
 sudo /bin/sh -c 'echo "server-name=ksimconnect.com" >> /etc/turnserver.conf'
 sudo /bin/sh -c 'echo "realm=ksimconnect.com" >> /etc/turnserver.conf'
-sudo /bin/sh -c 'echo "user=ksim-turn-dev:P@ssWord12345" >> /etc/turnserver.conf'
+sudo /bin/sh -c 'echo "user=guest:somepassword" >> /etc/turnserver.conf'
 sudo /bin/sh -c 'echo "total-quota=100" >> /etc/turnserver.conf'
 sudo /bin/sh -c 'echo "stale-nonce=600" >> /etc/turnserver.conf'
 sudo /bin/sh -c 'echo "cert=/etc/certs/fullchain.pem" >> /etc/turnserver.conf'
